@@ -1,50 +1,48 @@
-import { useStoreContext } from "../../utils/GlobalState";
+import React from "react";
+// import { useStoreContext } from "../../utils/GlobalState";
+import { UseDispatch } from "react-redux";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
-
-  const [, dispatch] = useStoreContext();
-
-  const removeFromCart = item => {
+  // const [, dispatch] = useStoreContext();
+  const dispatch = UseDispatch();
+  //removing item from cart
+  const removeFromCart = (item) => {
     dispatch({
       type: REMOVE_FROM_CART,
-      _id: item._id
+      _id: item._id,
     });
-    idbPromise('cart', 'delete', { ...item });
-
+    idbPromise("cart", "delete", { ...item });
   };
 
   const onChange = (e) => {
     const value = e.target.value;
-    if (value === '0') {
+    if (value === "0") {
       dispatch({
         type: REMOVE_FROM_CART,
-        _id: item._id
+        _id: item._id,
       });
-      idbPromise('cart', 'delete', { ...item });
-
+      idbPromise("cart", "delete", { ...item });
     } else {
       dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: item._id,
-        purchaseQuantity: parseInt(value)
+        purchaseQuantity: parseInt(value),
       });
-      idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
-
+      idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
     }
-  }
+  };
 
   return (
     <div className="flex-row">
       <div>
-        <img
-          src={`/images/${item.image}`}
-          alt=""
-        />
+        <img src={`/images/${item.image}`} alt="" />
       </div>
       <div>
-        <div>{item.name}, ${item.price}</div>
+        <div>
+          {item.name}, ${item.price}
+        </div>
         <div>
           <span>Qty:</span>
           <input
@@ -64,6 +62,6 @@ const CartItem = ({ item }) => {
       </div>
     </div>
   );
-}
+};
 
 export default CartItem;
