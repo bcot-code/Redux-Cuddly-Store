@@ -1,11 +1,11 @@
 import React from "react";
-
-import { UseDispatch } from "react-redux";
+//REX EXT
+import UseDispatch from "react-redux";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
-  
+  //  Dispatch function to make changes in the Redux store.
   const dispatch = UseDispatch();
   //removing item from cart
   const removeFromCart = (item) => {
