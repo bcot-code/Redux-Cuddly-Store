@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
-import { UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
@@ -15,7 +15,7 @@ function CategoryMenu() {
   //dispatch action to update categories
   const dispatch = useDispatch();
   //get categories from store state
-  const state = useSelector;
+  const state = useSelector((state) => state);
   const { categories } = state;
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
